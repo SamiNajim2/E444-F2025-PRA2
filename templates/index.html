@@ -33,7 +33,7 @@
 
     <div class="mb-3">
       <label class="form-label">{{ form.email.label.text }}</label>
-      {{ form.email(class="form-control", placeholder="you@utoronto.ca", type="email") }}
+      {{ form.email(class="form-control", placeholder="you@utoronto.ca") }}
       {% for err in form.email.errors %}
         <div class="text-danger small mt-1">{{ err }}</div>
       {% endfor %}
