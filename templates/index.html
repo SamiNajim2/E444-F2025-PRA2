@@ -1,7 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1 class="display-5 fw-bold">Hello {{ name }}!</h1>
-  <hr>
-  <p>The local date and time is {{ moment(current_time).format('LLLL') }}.</p>
-  <p>That was {{ moment(current_time).fromNow() }}.</p>
+<div class="container mt-4" style="max-width: 640px;">
+  <!-- yellow alerts (change notices) -->
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for msg in messages %}
+        <div class="alert alert-warning py-2 my-2" role="alert">{{ msg }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <h1>Hello, {{ name or "Stranger" }}!</h1>
+
+  {% if valid is defined %}
+    {% if valid %}
+      <p>Your UofT email is {{ email }}.</p>
+    {% else %}
+      <p><strong>Please use your UofT email.</strong></p>
+    {% endif %}
+  {% endif %}
+
+  <form method="POST" novalidate class="mt-3">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+      <label class="form-label">{{ form.name.label.text }}</label>
+      {{ form.name(class="form-control", placeholder="First (or First Last)") }}
+      {% for err in form.name.errors %}
+        <div class="text-danger small mt-1">{{ err }}</div>
+      {% endfor %}
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">{{ form.email.label.text }}</label>
+      {{ form.email(class="form-control", placeholder="you@utoronto.ca", type="email") }}
+      {% for err in form.email.errors %}
+        <div class="text-danger small mt-1">{{ err }}</div>
+      {% endfor %}
+    </div>
+
+    {{ form.submit(class="btn btn-primary") }}
+  </form>
+</div>
 {% endblock %}
