@@ -19,5 +19,5 @@ Verified the Flask app running inside Docker and confirmed it appears in `docker
 
 ![Activity 2.4 Docker](screenshots/Activity2.4_Docker.png)
 
-
+Screenshot of Page.
 ![Activity 2.4 page](screenshots/pic3.png)
